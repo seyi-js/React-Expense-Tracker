@@ -121,7 +121,16 @@ export const tokenConfig = getState => {
        if ( token ) {
            config.headers['x-auth-token']= token
        }
-    console.log( token )
+    // console.log( token )
     
     return config;
 }
+
+//Logout
+
+export const logout = () => dispatch => {
+    
+    return dispatch( {
+        type: LOGOUT_SUCCESS
+   })
+};

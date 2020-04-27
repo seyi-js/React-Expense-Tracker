@@ -1,5 +1,14 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import store from '../store'
+import { Redirect, Route } from 'react-router-dom';
+import Heading from  './expensesComponents/Header'
+import { logout } from '../actions/Action'
+import { connect } from 'react-redux'
+import Balance from './expensesComponents/Balance'
+import IncomeExpenses from './expensesComponents/IncomeExpenses'
+import TransactionList from './expensesComponents/TransactionList'
+import AddTransaction from './expensesComponents/AddTransaction'
 
 import {
     Collapse,
@@ -11,40 +20,47 @@ import {
     NavItem,
     Container
 } from 'reactstrap';
-import { connect } from 'react-redux';
 
-const NavBar = () => {
+
+const NavBar = (props) => {
     const [ isOpen, setIsopen ] = useState( false )
-    
+    const history = useHistory()
     const toggle = () => {
         setIsopen( !isOpen);
     }
-
+    const redirect = (
+        <React.Fragment>
+        
+            <Redirect to='/login' />
+           
+        </React.Fragment>
+)
+    const onLogout = () => {
+        store.dispatch( logout() );
+        history.push('/login')
+    }
+    const {isAuthenticated} = props.transaction
     return (
         <React.Fragment>
         <Navbar color="dark" dark expand="sm" className="mb-5 bg-blue">
                     <Container fluid={true}>
-                        <NavbarBrand href='/'>TrackIt
+                        <NavbarBrand><Link to="/">TrackIt</Link>
             </NavbarBrand>
                         <NavbarToggler onClick={ toggle } />
                         <Collapse isOpen={ isOpen } navbar>
                             <Nav className="ml-auto" navbar>
 
-                                <NavItem>
-                                    <NavLink>
-                                        <Link to='/' style={ { color: 'white', textDecoration: 'none' } }>Home</Link>
-                                    </NavLink>
-                                </NavItem>
-                              
-                                <NavItem>
-                                    <NavLink>
-                                        <Link to="" style={ { color: 'white', textDecoration: 'none' } }>Logout</Link>
-                                    </NavLink>
-                                </NavItem>
+                               
+                              {isAuthenticated ?  <NavItem>
+                                <NavLink>
+                                    <Link  style={ { color: 'white', textDecoration: 'none' } } onClick={onLogout}>Logout</Link>
+                                </NavLink>
+                            </NavItem> : '' }
+                               
                                
                                 <NavItem>
                                     <NavLink>
-                                        <a href="https://github.com/seyi-js/Ecommerce-App/" target="_blank" style={ { color: 'white', textDecoration: 'none' } }><i className="fab fa-github"></i> GitHub </a>
+                                        <Link to="https://github.com/seyi-js/Ecommerce-App/" target="_blank" style={ { color: 'white', textDecoration: 'none' } }><i className="fab fa-github"></i> GitHub </Link>
                                     </NavLink>
                                 </NavItem>
                                 
@@ -53,10 +69,21 @@ const NavBar = () => {
                     </Container>
                 </Navbar>
               
-        
+                            {isAuthenticated ?  <div className="container">
+                            <Route exact path="/expenses">
+                            <Heading />
+                                    <Balance />
+                                    <IncomeExpenses/>
+                                    <TransactionList/>
+                                    <AddTransaction/>
+                                    </Route>
+                            </div> :  redirect  }         
+               
     </React.Fragment>
     )
 }
 
-
-export default NavBar
+const mapStateToProps = (state) => ({
+    transaction: state.transaction
+})
+export default connect(mapStateToProps, {logout})(NavBar)

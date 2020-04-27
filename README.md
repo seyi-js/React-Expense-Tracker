@@ -7,6 +7,7 @@
 - React-redux
 - ExpressJs
 - MongoDb
+- Jwt
 
 
 

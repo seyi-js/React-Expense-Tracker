@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {useHistory, Redirect, Link} from 'react-router-dom'
+import {useHistory,Link} from 'react-router-dom'
 import {
     Button,
     Form,
@@ -32,7 +32,7 @@ const Login = ( props ) => {
     useEffect( () => {
         const { error} = props;
         const { isAuthenticated } = props.transaction;
-        console.log(isAuthenticated)
+        // console.log(isAuthenticated)
         if ( error.id === 'LOGIN_FAIL' ) {
             setMessage( error.msg.msg )
         } else {
@@ -61,7 +61,7 @@ const Login = ( props ) => {
                 onChange={e => setPassword(e.target.value) } />
            
             <Button color="dark" style={ { marginTop: "2rem" } } block>
-                Register
+                Login
     </Button>
         </FormGroup>
     </Form>
