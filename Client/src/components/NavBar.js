@@ -60,7 +60,7 @@ const NavBar = (props) => {
                                
                                 <NavItem>
                                     <NavLink>
-                                        <Link to="https://github.com/seyi-js/React-Expense-Tracker" target="_blank" style={ { color: 'white', textDecoration: 'none' } }><i className="fab fa-github"></i> GitHub </Link>
+                                        <a href="https://github.com/seyi-js/React-Expense-Tracker" target="_blank" style={ { color: 'white', textDecoration: 'none' } }><i className="fab fa-github"></i> GitHub </a>
                                     </NavLink>
                                 </NavItem>
                                 
