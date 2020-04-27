@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Transaction from './Transaction'
-import { deleteItem } from '../actions/Action'
+import { deleteItem } from '../../actions/Action'
 
 const TransactionList = (props) => {
 
@@ -12,7 +12,7 @@ const TransactionList = (props) => {
       <h3>History</h3>
         <ul className="list">
           { transactions.map( transaction => (
-            <Transaction transaction={ transaction } key={ transaction.id } deleteItem={ deleteItem}/>
+            <Transaction transaction={ transaction } key={ transaction._id } deleteItem={ deleteItem}/>
           ))}
         
       </ul> 

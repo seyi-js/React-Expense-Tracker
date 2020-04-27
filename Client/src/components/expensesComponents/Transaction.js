@@ -1,5 +1,5 @@
 import React from 'react'
-import store from '../store'
+import store from '../../store'
 
 const Transaction = ({transaction, deleteItem}) => {
 
@@ -12,7 +12,7 @@ const Transaction = ({transaction, deleteItem}) => {
     return (
         <>
         <li className={transaction.amount < 0 ? 'minus' : 'plus'}>
-                { transaction.text } <span>{ sign }${Math.abs(transaction.amount)}</span><button onClick={()=>delItem(transaction.id)} className="delete-btn">x</button>
+                { transaction.text } <span>{ sign }${Math.abs(transaction.amount)}</span><button onClick={()=>delItem(transaction._id)} className="delete-btn">x</button>
       </li>  
         </>
     )
