@@ -11,4 +11,4 @@
 
 
 
-### Live Demo (https://expense-tracker925.herokuapp.com/expenses)
+### Live Demo (https://expense-tracker925.herokuapp.com)
